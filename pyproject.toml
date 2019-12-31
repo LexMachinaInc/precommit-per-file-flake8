@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flake8_per_file"
+version = "0.1.0"
+description = "Per file flake8"
+authors = ["Gavin Carothers <gavin@carothers.name>"]
+license = "Apache-2.0"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+flake8 = "^3.7.9"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+flake8-file = 'flake8_per_file:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

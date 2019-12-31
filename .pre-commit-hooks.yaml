@@ -1,0 +1,7 @@
+- id: flake8-file
+  name: flake8 per file
+  description: This hook runs flake8 one file at a time.
+  entry: flake8-file
+  language: python
+  types: [python]
+  require_serial: True
