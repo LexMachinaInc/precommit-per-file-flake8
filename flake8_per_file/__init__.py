@@ -8,6 +8,7 @@ to run flake8 on. Could likely run on all files from a given subpackage
 """
 
 import os.path
+import pathlib
 import subprocess
 import sys
 
@@ -18,8 +19,11 @@ def main():
     all_output = ''
     returncode = 0
     for arg in sys.argv[1:]:
+        arg_path = pathlib.Path(arg)
+        arg_root = arg_path.parts[0]
+        cfg = pathlib.Path(arg_root) / 'setup.cfg'
         sp_result = subprocess.run(
-            [my_flake8, arg],
+            [my_flake8, '--config', cfg, arg],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding='utf8',
