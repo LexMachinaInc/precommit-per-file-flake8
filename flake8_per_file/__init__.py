@@ -13,17 +13,29 @@ import subprocess
 import sys
 
 
+def find_cfg(arg):
+    arg_path = pathlib.Path(arg).expanduser().resolve()
+    for i in range(len(arg_path.parts)):
+        possible_cfg_path = pathlib.Path(*arg_path.parts[:i]) / 'setup.cfg'
+        if possible_cfg_path.is_file():
+            return ('--config', possible_cfg_path)
+
+    return ()
+
+
 def main():
     my_flake8 = os.path.join(os.path.dirname(sys.argv[0]), 'flake8')
 
     all_output = ''
     returncode = 0
+    flake_args = []
     for arg in sys.argv[1:]:
-        arg_path = pathlib.Path(arg)
-        arg_root = arg_path.parts[0]
-        cfg = pathlib.Path(arg_root) / 'setup.cfg'
+        if arg.startswith('-'):
+            flake_args.append(arg)
+            continue
+
         sp_result = subprocess.run(
-            [my_flake8, '--config', cfg, arg],
+            [my_flake8, *flake_args, *find_cfg(arg), arg],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding='utf8',
