@@ -8,8 +8,19 @@ to run flake8 on. Could likely run on all files from a given subpackage
 """
 
 import os.path
+import pathlib
 import subprocess
 import sys
+
+
+def find_cfg(arg):
+    arg_path = pathlib.Path(arg).expanduser().resolve()
+    for i in range(len(arg_path.parts)):
+        possible_cfg_path = pathlib.Path(*arg_path.parts[:i]) / 'setup.cfg'
+        if possible_cfg_path.is_file():
+            return ('--config', possible_cfg_path)
+
+    return ()
 
 
 def main():
@@ -17,9 +28,14 @@ def main():
 
     all_output = ''
     returncode = 0
+    flake_args = []
     for arg in sys.argv[1:]:
+        if arg.startswith('-'):
+            flake_args.append(arg)
+            continue
+
         sp_result = subprocess.run(
-            [my_flake8, arg],
+            [my_flake8, *flake_args, *find_cfg(arg), arg],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding='utf8',
@@ -27,5 +43,5 @@ def main():
         returncode = sp_result.returncode
         all_output += sp_result.stdout
 
-    sys.stderr.write(all_output)
+    sys.stdout.write(all_output)
     sys.exit(returncode)
