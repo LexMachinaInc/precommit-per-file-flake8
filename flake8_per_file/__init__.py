@@ -31,5 +31,5 @@ def main():
         returncode = sp_result.returncode
         all_output += sp_result.stdout
 
-    sys.stderr.write(all_output)
+    sys.stdout.write(all_output)
     sys.exit(returncode)
