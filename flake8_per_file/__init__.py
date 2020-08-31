@@ -40,7 +40,7 @@ def main():
             stderr=subprocess.STDOUT,
             encoding='utf8',
         )
-        returncode = sp_result.returncode
+        returncode = max(sp_result.returncode, returncode)
         all_output += sp_result.stdout
 
     sys.stdout.write(all_output)
