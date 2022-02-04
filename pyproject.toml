@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flake8_per_file"
-version = "0.4.1"
+version = "0.5.0"
 description = "Per file flake8"
 authors = ["Gavin Carothers <gavin@carothers.name>"]
 license = "Apache-2.0"
