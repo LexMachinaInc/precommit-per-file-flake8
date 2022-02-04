@@ -28,14 +28,11 @@ def main():
 
     all_output = ''
     returncode = 0
-    flake_args = []
-    for arg in sys.argv[1:]:
-        if arg.startswith('-'):
-            flake_args.append(arg)
-            continue
-
+    flake_args = [arg for arg in sys.argv[1:] if not pathlib.Path(arg).exists()]
+    filenames = [arg for arg in sys.argv[1:] if pathlib.Path(arg).exists()]
+    for filename in filenames:
         sp_result = subprocess.run(
-            [my_flake8, *flake_args, *find_cfg(arg), arg],
+            [my_flake8, *flake_args, *find_cfg(filename), filename],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding='utf8',
