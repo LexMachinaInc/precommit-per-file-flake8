@@ -5,3 +5,11 @@
   language: python
   types: [python]
   require_serial: True
+
+- id: isort-file
+  name: isort per file
+  description: This hook runs isort one file at a time.
+  entry: isort-file
+  language: python
+  types: [python]
+  require_serial: True
