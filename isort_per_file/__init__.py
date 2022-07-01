@@ -17,7 +17,7 @@ import sys
 
 
 def main():
-    my_flake8 = os.path.join(os.path.dirname(sys.argv[0]), 'flake8')
+    my_isort = os.path.join(os.path.dirname(sys.argv[0]), 'isort')
 
     all_output = ''
     returncode = 0
@@ -25,7 +25,7 @@ def main():
     filenames = [arg for arg in sys.argv[1:] if pathlib.Path(arg).exists()]
     for filename in filenames:
         sp_result = subprocess.run(
-            [my_flake8, *isort_args, filename],
+            [my_isort, *isort_args, filename],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding='utf8',
