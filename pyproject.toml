@@ -4,6 +4,10 @@ version = "0.5.1"
 description = "Per file flake8"
 authors = ["Gavin Carothers <gavin@carothers.name>"]
 license = "Apache-2.0"
+packages = [
+    { include = "flake8_per_file" },
+    { include = "isort_per_file" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
