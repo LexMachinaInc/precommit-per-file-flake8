@@ -21,7 +21,7 @@ def main():
 
     all_output = ''
     returncode = 0
-    isort_args = [arg for arg in sys.argv[1:] if not pathlib.Path(arg).exists()]
+    isort_args = [arg for arg in sys.argv[1:] if not pathlib.Path(arg).exists() and arg not in ('-', '--filename')]
     filenames = [arg for arg in sys.argv[1:] if pathlib.Path(arg).exists()]
     for filename in filenames:
         sp_result = subprocess.run(
