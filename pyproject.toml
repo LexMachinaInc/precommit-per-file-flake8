@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flake8_per_file"
-version = "0.7.0"
+version = "0.7.1"
 description = "Per file flake8"
 authors = ["Gavin Carothers <gavin@carothers.name>"]
 license = "Apache-2.0"
@@ -11,7 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.11.0"
-flake8 = "^7.0.0"
+flake8 = "^7.1.1"
 isort = "^5.13.2"
 
 [tool.poetry.dev-dependencies]
